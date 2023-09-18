@@ -11,7 +11,7 @@ This repository is the official implementation of the [paper](https://scholar.go
 The paper will be presented at the IEEE International Conference on Intelligent Transportation Systems 2023. If you find our work useful, please consider [citing](#reference) it.
 
 <p align="center">
-  <img src="docs/teaser.png" alt="" width="480" />
+  <img src="docs/teaser.png" alt="" width="400" />
 </p>
 
 ## Table of contents
@@ -43,12 +43,12 @@ Based on our chosen LSTM-based encoding of bird's-eye-view representations, we a
 
 #### Training
 <p align="center">
-  <img src="docs/avg_return.png" alt="Replicated real-world racetracks." width="480" />
+  <img src="docs/avg_return.png" alt="Replicated real-world racetracks." width="400" />
 </p>
 
 #### Driving Behavior
 <p align="center">
-  <img src="docs/anim.gif" alt="" width="480" />
+  <img src="docs/anim.gif" alt="" width="400" />
 </p>
 
 ## Install
