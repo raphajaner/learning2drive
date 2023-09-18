@@ -6,14 +6,12 @@ This repository is the official implementation of the [paper](https://scholar.go
 
 > **Efficient Learning of Urban Driving Policies Using Bird's-Eye-View State Representations**
 >
-> [Trumpp, Raphael](https://scholar.google.com/citations?user=2ttMbLQAAAAJ&hl=en), [Martin Buechner](), [Abhinav Valada](), and [Marco Caccamo](https://scholar.google.com/citations?user=Jbo1MqwAAAAJ&hl=en&oi=ao).
+> [Trumpp, Raphael](https://scholar.google.com/citations?user=2ttMbLQAAAAJ&hl=en), [Martin Buechner](https://rl.uni-freiburg.de/people/buechner), [Abhinav Valada](https://rl.uni-freiburg.de/people/valada), and [Marco Caccamo](https://scholar.google.com/citations?user=Jbo1MqwAAAAJ&hl=en&oi=ao).
 
 The paper will be presented at the IEEE International Conference on Intelligent Transportation Systems 2023. If you find our work useful, please consider [citing](#reference) it.
 
 <p align="center">
-  <img src="docs/anim_1.gif" alt="Replicated real-world racetracks." width="200" />
-  <img src="docs/anim_2.gif" alt="Replicated real-world racetracks." width="200" />
-  <img src="docs/anim_3.gif" alt="Replicated real-world racetracks." width="200" />
+  <img src="docs/anim.gif" alt="" width="480" />
 </p>
 
 ## Table of contents
