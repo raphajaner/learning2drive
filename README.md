@@ -35,17 +35,16 @@ RecurrDriveNet causes less than one infraction per driven kilometer by interacti
 Current reinforcement learning approaches for learning driving policies face the bottleneck of dimensionality. In this paper, we evaluate the efficiency of various bird's-eye-view representations used for describing the state of the driving scene. In addition to that, we propose a novel LSTM-based encoding scheme for efficiently encoding the bird's-eye-view state representation across the full trajectory of states in a reinforcement learning fashion. This alleviates the need for old-fashioned frame-stacking methods and enables further long-horizon driving research.
 
 <p align="center">
-  <img src="docs/network.png" alt="Architecture of the residual controller." width="400" />
+  <img src="docs/frame_stacking.png" alt="" width="400" />
+  <img width="40">
+  <img src="docs/lstm.png" alt="" width="400" />
 </p>
   
-### Simulator and Racetracks
-This repository uses an adapted version of the  [F1TENTH gym](https://github.com/f1tenth/f1tenth_gym) as simulator.
-Map data of replicated real-world racetracks are used from the [F1TENTH maps](https://github.com/f1tenth/f1tenth_racetracks) repository.
+### Results
+Based on our chosen LSTM-based encoding of bird's-eye-view representations, we achieve significantly higher average returns while reducing the number of infractions when driving compared to frame-stacking methods. This allows, e.g., also robust stopping at red traffic lights.
 
-Racetracks for training and testing: (a) Nurburgring, (b) Moscow Raceway, (c) Mexico City, (d) Brands Hatch, 
-(e) Sao Paulo, (f) Sepang, (g) Hockenheim, (h) Budapest, (i) Spielberg, (j) Sakhir, (k) Catalunya, and (l) Melbourne.
 <p align="center">
-  <img src="docs/racetracks.png" alt="Replicated real-world racetracks." width="400" />
+  <img src="docs/avg_return.png" alt="Replicated real-world racetracks." width="400" />
 </p>
 
 ### Results: Lap times
