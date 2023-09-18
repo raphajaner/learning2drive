@@ -11,9 +11,7 @@ This repository is the official implementation of the [paper](https://scholar.go
 The paper will be presented at the IEEE International Conference on Intelligent Transportation Systems 2023. If you find our work useful, please consider [citing](#reference) it.
 
 <p align="center">
-  <img src="docs/teaser.png" alt="" width="320" />
-  <img width="120">
-  <img src="docs/anim.gif" alt="" width="320" />
+  <img src="docs/teaser.png" alt="" width="480" />
 </p>
 
 ## Table of contents
@@ -41,94 +39,35 @@ Current reinforcement learning approaches for learning driving policies face the
 </p>
   
 ### Results
-Based on our chosen LSTM-based encoding of bird's-eye-view representations, we achieve significantly higher average returns while reducing the number of infractions when driving compared to frame-stacking methods. This allows, e.g., also robust stopping at red traffic lights.
+Based on our chosen LSTM-based encoding of bird's-eye-view representations, we achieve significantly higher average returns while reducing the number of infractions when driving compared to frame-stacking methods. This allows also robust stopping at red traffic lights.
 
+#### Training
 <p align="center">
-  <img src="docs/avg_return.png" alt="Replicated real-world racetracks." width="400" />
+  <img src="docs/avg_return.png" alt="Replicated real-world racetracks." width="480" />
 </p>
 
-### Results: Lap times
-#### Training:
-| **Track**    | **Baseline in s** | **Residual in s** | **Improvement in s** | **Improvement in %** |
-|--------------|-------------------|-------------------|----------------------|----------------------|
-| Nuerburgring | 60.84             | 58.07             | 2.77                 | 4.55                 |
-| Moscow       | 46.75             | 43.45             | 3.30                 | 7.06                 |
-| Mexico City  | 49.12             | 46.76             | 2.36                 | 4.80                 |
-| Brands Hatch | 45.92             | 44.97             | 0.95                 | 2.07                 |
-| Sao Paulo    | 47.92             | 44.92             | 3.00                 | 6.26                 |
-| Sepang       | 66.24             | 63.18             | 3.06                 | 4.62                 |
-| Hockenheim   | 49.96             | 47.35             | 2.61                 | 5.22                 |
-| Budapest     | 54.33             | 51.67             | 2.66                 | 4.90                 |
-| Spielberg    | 45.33             | 43.93             | 1.40                 | 3.09                 |
-
-
-#### Test:
-| **Track** | **Baseline in s** | **Residual in s** | **Improvement in s** | **Improvement in %** |
-|-----------|-------------------|-------------------|----------------------|----------------------|
-| Sakhir    | 60.34             | 57.72             | 2.62                 | 4.34                 |
-| Catalunya | 56.50             | 53.54             | 1.49                 | 5.24                 |
-| Melbourne | 61.03             | 59.54             | 2.96                 | 2.44                 |
-
-#### Overall:
-| **Track** | **Baseline in s** | **Residual in s** | **Improvement in s** | **Improvement in %** |
-|-----------|-------------------|-------------------|----------------------|----------------------|
-| Average   | 53.69             | 50.85             | 2.43                 | 4.55                 |
-
+#### Driving Behavior
+<p align="center">
+  <img src="docs/anim.gif" alt="" width="480" />
+</p>
 
 ## Install
 - We recommend to use a virtual environment for the installation:
     ```bash
-    python -m venv rpl4f110_env
-    source rpl4f110_env/bin/activate
+    python -m venv learning2drive
+    source learning2drive/bin/activate
     ```
 - Activate the environment and install the following packages:
     ```bash
     pip install torch
-    pip install gymnasium
-    pip install tensorboard
-    pip install hydra-core
-    pip install tqdm
-    pip install flatdict
-    pip install torchinfo
-    pip install torchrl
-    pip install numba
-    pip install scipy
-    pip install pyglet
-    pip install pillow
-    pip install pyglet==1.5
+    TBD
     ```
-- The simulator should be installed as a module:
-    ```bash
-    cd simulator
-    pip install -e .
-    ```
-## Usage
-### Training
-After setting you desired configuration in the [config.yaml](config.yaml) file, you can start the training by running:
-```bash
-python main.py
-```
-Specific names of the experiment can be set by running:
-```bash
-python main.py +exp_name=your_experiment_name
-```
-The use of your GPU can be avoided by running:
-```bash
-python main.py +cuda=False
-```
-### Monitoring
-The training results are stored in the `outputs` folder. The training progress can be monitored with tensorboard:
-```bash
-tensorboard --logdir outputs
-```
-### Others
-The baseline controller can be evaluated by running:
-```bash
-python main.py +bench_baseline=True
-```
 
 ### Docstrings
 Most of the code is documented with *automatically* generated docstrings, please use them with caution.
+
+## Usage
+TBD
 
 ## Reference
 If you find our work useful, please consider citing our paper:
