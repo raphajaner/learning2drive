@@ -11,7 +11,9 @@ This repository is the official implementation of the [paper](https://scholar.go
 The paper will be presented at the IEEE International Conference on Intelligent Transportation Systems 2023. If you find our work useful, please consider [citing](#reference) it.
 
 <p align="center">
-  <img src="docs/anim.gif" alt="" width="480" />
+  <img src="docs/teaser.png" alt="" width="320" />
+  <img width="120">
+  <img src="docs/anim.gif" alt="" width="320" />
 </p>
 
 ## Table of contents
