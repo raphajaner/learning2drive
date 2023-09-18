@@ -29,10 +29,8 @@ In this paper, we study the challenges of constructing bird's-eye-view represent
 Our PPO-based approach, called RecurrDriveNet, is demonstrated on a simulated autonomous driving task in CARLA, where it outperforms traditional frame-stacking methods while only requiring one million experiences for efficient training. 
 RecurrDriveNet causes less than one infraction per driven kilometer by interacting safely with other road users.
 
-### Residual Policy Learning
-Proposed control architecture consisting of a base controller that outputs control action $a_{\text{B}}$ which is added to the 
-residual action $a_{\text{R}}$ to form the combined action $a_{\text{RB}}$. The action $a_{\text{R}}$ of the
-residual controller is sampled from a distribution whose parameters are defined by a NN.
+### Our Contribution
+Current reinforcement learning approaches for learning driving policies face the bottleneck of dimensionality. In this paper, we evaluate the efficiency of various bird's-eye-view representations used for describing the state of the driving scene. In addition to that, we propose a novel LSTM-based encoding scheme for efficiently encoding the bird's-eye-view state representation across the full trajectory of states in a reinforcement learning fashion. This alleviates the need for old-fashioned frame-stacking methods and enables further long-horizon driving research.
 
 <p align="center">
   <img src="docs/network.png" alt="Architecture of the residual controller." width="400" />
