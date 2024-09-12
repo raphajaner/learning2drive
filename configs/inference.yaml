@@ -1,0 +1,148 @@
+# parameters for the gym_carla environment
+exp_name: None # rather use wandb names now
+seed: 1
+wandb:
+  use: true # if toggled, this experiment will be tracked with Weights and Biases
+  project: 'carlabois'  # learning4drl
+  entity: 'tumwcps'  # your_entity
+torch_deterministic: false  # if toggled, `torch.backends.cudnn.deterministic=False
+async_env: true  # if true, the environment will run in parallel (async) and not sequentially
+docker: false
+setup:
+  host: '127.0.0.1'
+  device_learning: 'cuda:0' # 'cuda:0' / 'cpu'
+  timeout: 10
+  retries_on_error: 2
+  load_checkpoint:
+    use: false
+    dir: "./trained_agents"
+    agent_name: "agent_multi_lstm"
+  host_gpus: [ 0 ] # single-gpu [0]
+  docker_gpu: 0
+  docker_base_port: 57000
+  docker_carla_wait: 40
+  gpu_used_thresh_factor: 0.4
+  carla_mem_instance_size: 5500 # mib allocated for one CARLA instance
+viz:
+  render_off_screen: false # pygame + carla rendering offscreen
+  pygame_rendering: false # pygame rendering
+  carla_no_rendering: false # no carla rendering
+  quality_level: Epic # Do not use 'Low', is unstable!
+  display_size: 128  # screen size of bird-eye render
+  follow_cam_ego: True
+  spectator_z_offset: 12
+  #max_past_step: 2  # the number of past steps to draw
+  #
+env:
+  wrapper:
+    normalize_obs: True
+    clip_obs: [ -10, 10 ]
+    normalize_rew: True
+    clip_rew: [ -10, 10 ]
+  reset_time: 60
+  town: 'Town02'  # which town to simulate
+  weather: 'ClearNoon'
+  sim:
+    dt: 0.1  # time interval between two frames
+    number_of_vehicles: 30
+    number_of_walkers: 50
+  ego:
+    vehicle_type: 'vehicle.mercedes.coupe_2020'  # filter for defining ego vehicle
+    continuous_accel_range: [ -3.0, 3.0 ]  # continuous acceleration range
+    continuous_steer_range: [ -0.3, 0.3 ]  # continuous steering angle range
+    max_waypt: 70  # maximum number of waypoints
+  other_road_users:
+    pedestrian_cross_factor: 0
+    pedestrian_seed: 42
+  traffic_manager:
+    # global_distance_to_leading_vehicle: 2.5
+    hybrid_physics_mode: False
+    hybrid_physics_radius: 70
+  random_road_options: True
+  sensors:
+    main_modality: multi_bev # bev / rgb / graph
+    lidar_bin: 0.125  # bin size of lidar sensor (meter)
+    obs_range: 30  # observation range (meter)
+    fov: 110
+    d_behind: 12  # distance behind the ego vehicle (meter)
+    lidar_height: 2.1
+    display_route: True  # whether to render the desired route
+    size_output_image: 128  # size of the image
+    scale_pedestrians_extent: 4.0
+  exclude_keys: [ 'multi_birds_eye_view', 'rgb_birds_eye_view' ]
+rl:
+  max_time_episode: 2048  # maximum timesteps per episode
+  # PPO
+  total_timesteps: 1e6  # total timesteps of the experiments
+  learning_rate: 2.5e-5  # the learning rate of the optimizer
+  weight_decay: 0.0  # weight decay coefficient
+  weight_decay_policy: 0.0  # weight decay coefficient for last layer of policy
+  num_envs: 2 # the number of parallel game environments
+  num_steps: 256 # the number of steps to run in each environment per policy rollout
+  gamma: 0.999  # the discount factor gamma
+  gae_lambda: 0.95  # the lambda for the general advantage estimation
+  num_minibatches: 4 # the number of mini-batches (set to e.g. 32 for no-lstm)
+  update_epochs: 4 # the K epochs to update the policy
+  norm_adv: True  # Toggles advantages normalization
+  clip_coef: 0.1  # the surrogate clipping coefficient
+  clip_vloss: true  # Toggles whether to use a clipped loss for the value function, as per the paper.
+  ent_coef: 0.0  # coefficient of the entropy
+  vf_coef: 0.5  # coefficient of the value function
+  max_grad_norm: 5  # the maximum norm for the gradient clipping
+  target_kl: 0.015  #  0.01 the target KL divergence threshold
+  distribution: 'TanhNormal'  # distribution to use for the actor's head -> TanhNormal is bounded [-1, 1]
+  upscale_tanh: 5.0  # internal scaling of the TanhNormal distribution for numerical stability
+  rpo_alpha: 0.01  # alpha parameter for RPO
+  init_logstd: -0.7  # exp(-0.7) = 0.50 https://github.com/openai/spinningup/blob/038665d62d569055401d91856abb287263096178/spinup/algos/pytorch/ppo/core.py#L84
+  min_max_dist: [ -1, 1 ]  # min and max values for the TanhNormal distribution
+  double_network: false  # use two separate networks for the actor and the critic
+  layer_norm: false  # use layer normalization
+  anneal_actor_logstd: false  # anneal the standard deviation of the actor
+  anneal_lr: false  # Toggle learning rate annealing for policy and value networks
+  anneal_lr_factor: 0.1 # eta_min = lr * factor
+  actor:
+    action_offset: 0.0 # offset for the action
+    action_init_std: 0.01 # scale for the action
+    action_init_bias: 0.0  # nn init bias for the action
+    fc_arch: [ 1 ]
+  critic:
+    value_init_std: 1.0  # scale for the value
+    value_init_bias: 0.0  # nn init bias for the v
+    fc_arch: [ 1 ]
+  hidden_out_dim: 256
+  lstm:
+    use: true
+    num_layers: 1
+    hidden_size: 256
+    num_sub_minibatches: 1 # number of subsets to split the minibatch into for TBPTT
+  image:
+    type: 'custom'
+    grayscale: false
+    load_pretrained: false
+    pool_first: false
+    pool_last: false
+    conv_arch: [
+      [ 3, 32, 8, 4, 0 ],
+      [ 32, 64, 4, 2, 0 ],
+      [ 64, 64, 3, 2, 0 ]
+    ] # in, out, kernel, stride, padding // ((32, 5, 2), (64, 3, 2), (128, 3, 2), (256, 3, 2), and (256, 4, 1),
+  reward:
+    no_traffic_lights: false
+    out_lane_thres: 0.5  # NOT USED ANYMORE threshold for out of lane
+    collision: 200
+    red_light: 200
+    vel_lon: 1
+    speeding: 10
+    oo_lane: 1
+    steer: 5
+    lat_acc: 0.2
+    reward_r_step: 0.0
+    speed_dev: 0.0
+  frame_stack:
+    use: false
+    n_frames: 5  # 12 + 1
+    skip_frames: 1  # 0, 6, 12
+eval:
+  freq: 50
+  n_steps: 80000
+  mode: false  # If true, uses the distribution's mode instead of sampling

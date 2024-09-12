@@ -1,0 +1,38 @@
+defaults:
+  - config
+async_env: true
+wandb: true
+docker: true
+setup:
+  device_learning: 'cuda:0' # 'cuda:0' / 'cpu'
+  host_gpus: [ 0 ] # single-gpu [0]
+  docker_base_port: 56000
+viz:
+  render_off_screen: true # pygame + carla rendering offscreen
+  pygame_rendering: false # pygame rendering
+  carla_no_rendering: true # no carla rendering
+env:
+  sensors:
+    main_modality: multi_bev # rgb_bev / multi_bev / rgb
+    size_output_image: 128  # size of the image
+rl:
+  total_timesteps: 1e6  # total timesteps of the experiments
+  actor:
+    fc_arch: [ 256, [ 256, 1 ] ]
+  critic:
+    fc_arch: [ 256, [ 256, 1 ] ]
+  lstm:
+    use: false
+  image:
+    type: 'custom'
+    grayscale: false
+    load_pretrained: false
+    pool_first: false
+    pool_last: false
+    conv_arch: [
+      [ 3, 32, 8, 4, 0 ],
+      [ 32, 64, 4, 2, 0 ],
+      [ 64, 64, 3, 2, 0 ],
+    ]
+  frame_stack:
+    use: true
